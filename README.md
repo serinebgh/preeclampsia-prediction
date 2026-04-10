@@ -1,133 +1,134 @@
 # Preeclampsia Risk Prediction
 
-Projet de Fin d'Études — Master Informatique, Université Badji Mokhtar Annaba
-
-
-## Présentation
-
-Ce projet a pour objectif de prédire le risque de prééclampsie chez les femmes enceintes à partir de données cliniques, en utilisant trois approches de machine learning : GMM, Random Forest et SVM. Les données sont stockées et récupérées depuis une base de données MySQL.
-
-La prééclampsie est une complication grave de la grossesse caractérisée par une hypertension artérielle et une protéinurie apparaissant après la 20ème semaine de grossesse. Une détection précoce est essentielle pour réduire les risques maternels et fœtaux.
+Final Year Project — Master's Degree in Computer Science, Badji Mokhtar Annaba University
 
 ---
 
-## Modèles implémentés
+## Overview
 
-| Modèle | Type | Fichier |
+This project aims to predict the risk of preeclampsia in pregnant women using clinical data and three machine learning approaches: Gaussian Mixture Model (GMM), Random Forest, and Support Vector Machine (SVM). Data is stored and retrieved from a MySQL database.
+
+Preeclampsia is a serious pregnancy complication characterized by high blood pressure and proteinuria appearing after the 20th week of pregnancy. Early detection is essential to reduce maternal and fetal risks.
+
+---
+
+## Models
+
+| Model | Type | File |
 |---|---|---|
-| Gaussian Mixture Model (GMM) | Non supervisé | `entrainement gmm/gmm sql.py` |
-| Random Forest | Supervisé | `entrainement random forest/random_f.py` |
-| Support Vector Machine (SVM) | Supervisé | `svm/svm_mysql.py` |
-| Interface comparative | Plateforme | `interface/platforme deux methode.py` |
+| Gaussian Mixture Model (GMM) | Unsupervised | `entrainement gmm/gmm sql.py` |
+| Random Forest | Supervised | `entrainement random forest/random_f.py` |
+| Support Vector Machine (SVM) | Supervised | `svm/svm_mysql.py` |
+| Comparative Interface | Platform | `interface/platforme deux methode.py` |
 
 ---
 
-## Variables utilisées
+## Features
 
-| Variable | Description |
+| Feature | Description |
 |---|---|
-| `age` | Âge de la patiente |
-| `sbp` | Pression artérielle systolique |
-| `dbp` | Pression artérielle diastolique |
-| `BMI` | Indice de masse corporelle |
-| `Proteinuria` | Présence de protéines dans les urines |
-| `chronic_hypertension` | Hypertension chronique |
-| `first_pregnancy` | Première grossesse |
-| `after_20_weeks` | Symptômes après 20 semaines |
-| `multiple` | Grossesse multiple |
-| `diabetes` | Diabète |
-| `PE` | Cible — prééclampsie (0 = Non, 1 = Oui) |
+| `age` | Patient age |
+| `sbp` | Systolic blood pressure |
+| `dbp` | Diastolic blood pressure |
+| `BMI` | Body mass index |
+| `Proteinuria` | Presence of protein in urine |
+| `chronic_hypertension` | Chronic hypertension |
+| `first_pregnancy` | First pregnancy |
+| `after_20_weeks` | Symptoms after 20 weeks |
+| `multiple` | Multiple pregnancy |
+| `diabetes` | Diabetes |
+| `PE` | Target — preeclampsia (0 = No, 1 = Yes) |
 
 ---
 
-## Résultats
+## Results
 
 ### Random Forest
-- Accuracy entraînement : **~96 %**
-- Accuracy test : **~97 %**
-- Variable la plus importante : **Protéinurie** (0.25), suivie de **SBP** (0.22)
+- Training accuracy: **~96%**
+- Test accuracy: **~97%**
+- Most important feature: **Proteinuria** (0.25), followed by **SBP** (0.22)
 
 ### SVM
-- Variable la plus importante : **DBP** (0.26), suivie de **SBP** (0.24)
+- Most important feature: **DBP** (0.26), followed by **SBP** (0.24)
 
 ### GMM
-- Accuracy globale : **~92 %**
-- Clustering non supervisé en 2 composantes
+- Overall accuracy: **~92%**
+- Unsupervised clustering with 2 components
 
 ---
 
-## Structure du projet
+## Project Structure
 
 ```
 preeclampsia-prediction/
 │
-├── database.xlsx                          # Base de données principale
+├── database.xlsx                             # Main dataset
 │
 ├── entrainement gmm/
-│   ├── gmm sql.py                         # Entraînement GMM
-│   ├── gmm_model.pkl                      # Modèle GMM sauvegardé
-│   ├── scaler.pkl                         # Normaliseur sauvegardé
-│   ├── pregnancy_cases_with_GMM.xlsx      # Résultats GMM
-│   └── Figure_1.png                       # Matrice de confusion GMM
+│   ├── gmm sql.py                            # GMM training script
+│   ├── gmm_model.pkl                         # Saved GMM model
+│   ├── scaler.pkl                            # Saved scaler
+│   ├── pregnancy_cases_with_GMM.xlsx         # GMM results
+│   └── Figure_1.png                          # GMM confusion matrix
 │
 ├── entrainement random forest/
-│   ├── random_f.py                        # Entraînement Random Forest
-│   ├── random_forest_preeclampsia_model.pkl
-│   ├── preeclampsia_prediction_results.xlsx
-│   ├── feature_importance.png
-│   ├── confusion_train_RF.png
-│   └── confusion_test_RF.png
+│   ├── random_f.py                           # Random Forest training script
+│   ├── random_forest_preeclampsia_model.pkl  # Saved RF model
+│   ├── preeclampsia_prediction_results.xlsx  # RF results
+│   ├── feature_importance.png                # Feature importance chart
+│   ├── confusion_train_RF.png                # Training confusion matrix
+│   └── confusion_test_RF.png                 # Test confusion matrix
 │
 ├── svm/
-│   ├── svm_mysql.py                       # Entraînement SVM
-│   ├── svm_pe_model.pkl
-│   ├── permutation_importance_*.png
-│   ├── confusion_matrix_training_SVM.png
-│   ├── confusion_matrix_test_SVM.png
-│   ├── predictions_training_*.xlsx
-│   ├── predictions_test_*.xlsx
-│   └── feature_importance_*.xlsx
+│   ├── svm_mysql.py                          # SVM training script
+│   ├── svm_pe_model.pkl                      # Saved SVM model
+│   ├── permutation_importance_*.png          # Permutation importance chart
+│   ├── confusion_matrix_training_SVM.png     # Training confusion matrix
+│   ├── confusion_matrix_test_SVM.png         # Test confusion matrix
+│   ├── predictions_training_*.xlsx           # Training predictions
+│   ├── predictions_test_*.xlsx               # Test predictions
+│   └── feature_importance_*.xlsx             # Feature importance data
 │
 └── interface/
-    └── platforme deux methode.py          # Interface comparative des modèles
+    └── platforme deux methode.py             # Comparative model interface
 ```
 
 ---
 
-## Prérequis
+## Requirements
 
 ```bash
 pip install pandas numpy scikit-learn matplotlib seaborn joblib sqlalchemy pymysql mysql-connector-python openpyxl
 ```
 
-Base de données MySQL requise :
-- Hôte : `localhost`
-- Base : `PreeclampsiaRiskDB`
-- Table : `pregnancy_cases`
+MySQL database required:
+- Host: `localhost`
+- Database: `PreeclampsiaRiskDB`
+- Table: `pregnancy_cases`
 
 ---
 
-## Utilisation
+## Usage
 
 ```bash
-# Entraînement GMM
+# Train GMM model
 python "entrainement gmm/gmm sql.py"
 
-# Entraînement Random Forest
+# Train Random Forest model
 python "entrainement random forest/random_f.py"
 
-# Entraînement SVM
+# Train SVM model
 python svm/svm_mysql.py
 
-# Lancer l'interface comparative
+# Launch comparative interface
 python "interface/platforme deux methode.py"
 ```
 
 ---
 
-## Auteurs
+## Authors
 
-Projet réalisé dans le cadre du Master Informatique — Université Badji Mokhtar Annaba
+Project developed as part of the Master's Degree in Computer Science — Badji Mokhtar Annaba University
 
-- **Serine** — [github.com/serinebgh](https://github.com/serinebgh)
+- **Serine Bougheloum** — [github.com/serinebgh](https://github.com/serinebgh)
 - **Ouissal Boumendjel** — [github.com/Ouissal-Boumendjel](https://github.com/Ouissal-Boumendjel)
